@@ -4,8 +4,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="Styles/image.css" rel="stylesheet" />
     <title></title>
-    <script src="./Scripts/Libs/seajs/2.2.1/sea.js" type="text/javascript"></script>
-    <script src="./Scripts/Config.js" type="text/javascript"></script>
+    <script src="Scripts/Normal/jquery.js"></script>
+    <script src="Scripts/Normal/mustache.js"></script>
+    <script src="Scripts/Normal/main.js"></script>
+    <script type="text/javascript">
+        //以下这一段放在JS文件里面也可以，随你
+        $(function () {
+            ImgBoost.Init({ id: 1 });
+            //或者如下所示
+            //ImgBoost.Init({ imgdata: [{ url: "images/1.jpg" }, { url: "images/2.jpg" }, { url: "images/3.jpg" }] });
+        })
+    </script>
+
+
 </head>
 <body class="no7day enableHover">
     <div id="page">
@@ -21,7 +32,7 @@
                             <div class="tb-booth">
                                 <a class="smallImg" href="javascript:void(0)">
                                     <span class="ks-imagezoom-wrap">
-                                        <img id="smallImg" src="images/2.1.jpg" width="500px" height="500px">
+                                        <img id="smallImg" width="500px" height="500px">
                                         <span class="ks-imagezoom-lens spZoom" style="position: absolute; width: 231.125px; height: 231.125px; display: none"></span>
                                     </span>
                                 </a>
@@ -35,10 +46,9 @@
         </div>
     </div>
     <div style="width: 430px; height: 430px;" class="ks-overlay ks-imagezoom-viewer divOverlay display" id="ks-component1257">
-        <div class="ks-overlay-content" id="ks-content-ks-component1257">
-            <img id="baseImg" class="baseImg" style="position: absolute; top: 0px; left: 0px;" src="images/2.1.jpg">
+        <div class="ks-overlay-content">
+            <img id="baseImg" class="baseImg" style="position: absolute; top: 0px; left: 0px;">
         </div>
     </div>
 </body>
 </html>
-<script type="text/javascript">  seajs.use("./Scripts/Modules/image", function (a) { a.ImgBoost.Init(); })</script>

@@ -1,19 +1,16 @@
 ﻿define(function (require, exports) {
     var $ = require("jquery");
-    var set;
-    var img = new Image();
-    img.src = "images/2.1.jpg";
-
-    var Action = {
-        Init: function () {
-            set = setInterval(Action.InitData(), 40);
-        },
-        InitData: function () {
-            if (img.width > 0 || img.height > 0) {
-                clearInterval(set);
-                $(".spZoom").width($(".divOverlay").width() * $(".smallImg").width() / img.width);
-                $(".spZoom").height($(".divOverlay").height() * $(".smallImg").height() / img.height);
-                $(".divOverlay").offset({ top: $(".smallImg").offset().top, left: $(".smallImg").offset().left + $(".smallImg").width() + 10 });
+    var mustache = require("mustache");
+    var ImgBoost = {
+        temp: { imgli: '{{#list}}<li><div class="tb-pic tb-s50"><a href="javascript:void(0)"><img data-src="{{{url}}}" src="{{{url}}}"></a></div></li>{{/list}}' },
+        Option: { set: 0, img: new Image(), imgdata: [{ url: "images/1.jpg" }, { url: "images/2.jpg" }, { url: "images/3.jpg" }, { url: "images/4.jpg" }, { url: "images/5.jpg" }] },
+        InitImg: function () {
+            if (ImgBoost.Option.img.width > 0 || ImgBoost.Option.img.height > 0) {
+                clearInterval(ImgBoost.Option.set);
+                $("#smallImg").attr("src", ImgBoost.Option.img.src);
+                $("#baseImg").attr("src", ImgBoost.Option.img.src);
+                $(".spZoom").width($(".divOverlay").width() * $(".smallImg").width() / ImgBoost.Option.img.width);
+                $(".spZoom").height($(".divOverlay").height() * $(".smallImg").height() / ImgBoost.Option.img.height);
                 $(".smallImg").hover(function () {
                     $(".spZoom").show();
                     $(".divOverlay").show();
@@ -42,12 +39,34 @@
                     }
                     $(".spZoom").offset({ left: left, top: top });
 
-                    $(".baseImg").offset({ left: $(".divOverlay").offset().left - (left - x) * $(".baseImg").width() / xWidth, top: $(".divOverlay").offset().top - (top - y) * $(".baseImg").height() / yHegiht });
+                    $("#baseImg").offset({ left: $(".divOverlay").offset().left - (left - x) * $("#baseImg").width() / xWidth, top: $(".divOverlay").offset().top - (top - y) * $("#baseImg").height() / yHegiht });
                 })
+            }
+        },
+        ChangeImg: function (obj) {
+            $("#imgList").find("li").removeClass("imgSelected");
+            $(obj).addClass("imgSelected");
+            this.Option.img.src = $(obj).find("img").eq(0).attr("data-src");
+            this.Option.set = setInterval("ImgBoost.InitImg()", 50);
+        },
+        GetImgArr: function () {
+            //根据编号获取你要的JSON集合的IMG数据，建议此处要50*50的小图比较好
+            this.Option.imgdata = [{ url: "images/1.jpg" }, { url: "images/2.jpg" }, { url: "images/3.jpg" }, { url: "images/4.jpg" }, { url: "images/5.jpg" }];
+        },
+        Init: function (option) {
+            $.extend(this.Option, option);
+            this.GetImgArr();
+            if (this.Option.imgdata.length > 0) {
+                $("#imgList").html(mustache.to_html(this.temp.imgli, { list: ImgBoost.Option.imgdata }));
+                $("#imgList").find("li").eq(0).addClass("imgSelected");
+                this.Option.img.src = this.Option.imgdata[0].url;
+                $("#imgList").find("li").click(function () {
+                    ImgBoost.ChangeImg(this);
+                });
+                this.Option.set = setInterval("ImgBoost.InitImg()", 50);
+                $(".divOverlay").offset({ top: $(".smallImg").offset().top, left: $(".smallImg").offset().left + $(".smallImg").width() + 10 });
             }
         }
     }
-
-
-    exports.Action = Action;
+    exports.ImgBoost = ImgBoost;
 })

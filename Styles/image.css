@@ -199,23 +199,12 @@ div {
 .tb-gallery .tb-thumb {
     overflow: hidden;
     text-align: center;
-    margin-left: -16px;
 }
 
     .tb-gallery .tb-thumb li {
         display: inline-block;
         margin: 0 0 0 16px;
-        padding-top: 22px;
     }
-
-    .tb-gallery .tb-thumb a {
-        float: left;
-        position: relative;
-        width: 60px;
-        height: 60px;
-        overflow: hidden;
-    }
-
 
 .tb-meta-icons {
     position: absolute;
@@ -296,4 +285,46 @@ fieldset, img {
 #page, #header, #content, #footer {
     margin-left: auto;
     margin-right: auto;
+}
+
+#bd .combo ul:after, #bd .scrolling-promo-content:after, #bd .tb-clearfix:after, #bd .tb-key dl:after, #bd .tb-other:after, .tb-popup-share .tb-tab-hd:after {
+    clear: both;
+    content: "";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.clear:after, .tb-clear:after, .tb-clearfix:after {
+    clear: both;
+    content: " ";
+    display: block;
+    height: 0;
+}
+
+
+.tb-gallery .tb-thumb li {
+    border: 2px solid #fff;
+    display: inline;
+    float: left;
+    height: 50px;
+    margin-right: 9px;
+    overflow: hidden;
+    transition-duration: 0.2s;
+    transition-property: border-color;
+    width: 50px;
+}
+
+.tb-s50, .tb-s50 a {
+    height: 50px;
+    width: 50px;
+}
+
+.tb-gallery .tb-thumb .imgSelected {
+    border-color: #f40;
+}
+
+.tb-pic a img {
+    width: 50px;
+    height: 50px;
 }

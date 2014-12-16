@@ -2,8 +2,8 @@
     var $ = require("jquery");
     var mustache = require("mustache");
     var ImgBoost = {
-        temp: { imgli: '{{#list}}<li><div class="tb-pic tb-s50"><a href="javascript:void(0)"><img data-src="{{{url}}}" src="{{{url}}}"></a></div></li>{{/list}}' },
-        Option: { set: 0, img: new Image(), imgdata: [{ url: "images/1.jpg" }, { url: "images/2.jpg" }, { url: "images/3.jpg" }, { url: "images/4.jpg" }, { url: "images/5.jpg" }] },
+        temp: { imgli: '{{#list}}<li><div class="tb-pic tb-s50"><a href="javascript:void(0)"><img data-src="{{{url}}}" src="{{{smallUrl}}}"></a></div></li>{{/list}}' },
+        Option: { set: 0, img: new Image(), imgdata: [] },
         InitImg: function () {
             if (ImgBoost.Option.img.width > 0 || ImgBoost.Option.img.height > 0) {
                 clearInterval(ImgBoost.Option.set);
@@ -51,7 +51,7 @@
         },
         GetImgArr: function () {
             //根据编号获取你要的JSON集合的IMG数据，建议此处要50*50的小图比较好
-            this.Option.imgdata = [{ url: "images/1.jpg" }, { url: "images/2.jpg" }, { url: "images/3.jpg" }, { url: "images/4.jpg" }, { url: "images/5.jpg" }];
+            this.Option.imgdata = [{ smallUrl: "images/1-1.jpg", url: "images/1.jpg" }, { smallUrl: "images/2-2.jpg", url: "images/2.jpg" }, { smallUrl: "images/3-3.jpg", url: "images/3.jpg" }, { smallUrl: "images/4-4.jpg", url: "images/4.jpg" }, { smallUrl: "images/5-5.jpg", url: "images/5.jpg" }];
         },
         Init: function (option) {
             $.extend(this.Option, option);

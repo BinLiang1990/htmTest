@@ -47,7 +47,7 @@
             $("#imgList").find("li").removeClass("imgSelected");
             $(obj).addClass("imgSelected");
             this.Option.img.src = $(obj).find("img").eq(0).attr("data-src");
-            this.Option.set = setInterval("ImgBoost.InitImg()", 50);
+            this.Option.set = setInterval(function () { ImgBoost.InitImg() }, 10);
         },
         GetImgArr: function () {
             //根据编号获取你要的JSON集合的IMG数据，建议此处要50*50的小图比较好

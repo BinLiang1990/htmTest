@@ -1,5 +1,5 @@
 ﻿var ImgBoost = {
-    temp: { imgli: '{{#list}}<li><div class="tb-pic tb-s50"><a href="javascript:void(0)"><img data-src="{{{url}}}" src="{{{url}}}"></a></div></li>{{/list}}' },
+    temp: { imgli: '{{#list}}<li><div class="tb-pic tb-s50"><a href="javascript:void(0)"><img data-src="{{{url}}}" src="{{{smallUrl}}}"></a></div></li>{{/list}}' },
     Option: { img: new Image(), imgdata: [] },
     InitImg: function () {
         if (ImgBoost.Option.img.width > 0 || ImgBoost.Option.img.height > 0) {
@@ -50,7 +50,7 @@
     GetImgArr: function () {
         //测试，当编号是1的时候，获取数据，根据编号获取你要的JSON集合的IMG数据，建议此处要50*50的小图比较好
         if (this.Option.id && this.Option.id == 1) {
-            this.Option.imgdata = [{ url: "images/1.jpg" }, { url: "images/2.jpg" }, { url: "images/3.jpg" }, { url: "images/4.jpg" }, { url: "images/5.jpg" }];
+            this.Option.imgdata = [{ smallUrl: "images/1-1.jpg", url: "images/1.jpg" }, { smallUrl: "images/2-1.jpg", url: "images/2.jpg" }, { smallUrl: "images/3-1.jpg", url: "images/3.jpg" }, { smallUrl: "images/4-1.jpg", url: "images/4.jpg" }, { smallUrl: "images/5-1.jpg", url: "images/5.jpg" }];
         }
     },
     Init: function (option) {

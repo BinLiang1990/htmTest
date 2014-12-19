@@ -8,6 +8,7 @@
             $("#baseImg").attr("src", ImgBoost.Option.img.src);
             $(".spZoom").width($(".divOverlay").width() * $(".smallImg").width() / ImgBoost.Option.img.width);
             $(".spZoom").height($(".divOverlay").height() * $(".smallImg").height() / ImgBoost.Option.img.height);
+            $(".smallImg").unbind("hover").unbind("mousemove");
             $(".smallImg").hover(function () {
                 $(".spZoom").show();
                 $(".divOverlay").show();
@@ -59,7 +60,7 @@
             $("#imgList").html(Mustache.to_html(this.temp.imgli, { list: ImgBoost.Option.imgdata }));
             $("#imgList").find("li").eq(0).addClass("imgSelected");
             this.Option.img.src = this.Option.imgdata[0].url;
-            $("#imgList").find("li").click(function () {
+            $("#imgList").find("li").mouseenter(function () {
                 ImgBoost.ChangeImg(this);
             });
             this.Option.set = setInterval("ImgBoost.InitImg()", 50);

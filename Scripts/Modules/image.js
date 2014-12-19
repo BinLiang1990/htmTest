@@ -11,6 +11,7 @@
                 $("#baseImg").attr("src", ImgBoost.Option.img.src);
                 $(".spZoom").width($(".divOverlay").width() * $(".smallImg").width() / ImgBoost.Option.img.width);
                 $(".spZoom").height($(".divOverlay").height() * $(".smallImg").height() / ImgBoost.Option.img.height);
+                $(".smallImg").unbind("hover").unbind("mousemove");
                 $(".smallImg").hover(function () {
                     $(".spZoom").show();
                     $(".divOverlay").show();
@@ -47,7 +48,7 @@
             $("#imgList").find("li").removeClass("imgSelected");
             $(obj).addClass("imgSelected");
             this.Option.img.src = $(obj).find("img").eq(0).attr("data-src");
-            this.Option.set = setInterval("ImgBoost.InitImg()", 50);
+            this.Option.set = setInterval(function () { ImgBoost.InitImg() }, 50);
         },
         GetImgArr: function () {
             //根据编号获取你要的JSON集合的IMG数据，建议此处要50*50的小图比较好
@@ -60,10 +61,10 @@
                 $("#imgList").html(mustache.to_html(this.temp.imgli, { list: ImgBoost.Option.imgdata }));
                 $("#imgList").find("li").eq(0).addClass("imgSelected");
                 this.Option.img.src = this.Option.imgdata[0].url;
-                $("#imgList").find("li").click(function () {
+                $("#imgList").find("li").mouseenter(function () {
                     ImgBoost.ChangeImg(this);
                 });
-                this.Option.set = setInterval("ImgBoost.InitImg()", 50);
+                this.Option.set = setInterval(function () { ImgBoost.InitImg() }, 50);
                 $(".divOverlay").offset({ top: $(".smallImg").offset().top, left: $(".smallImg").offset().left + $(".smallImg").width() + 10 });
             }
         }

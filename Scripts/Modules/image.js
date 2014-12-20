@@ -1,6 +1,7 @@
 ﻿define(function (require, exports) {
     var $ = require("jquery");
     var mustache = require("mustache");
+    var Tweenmax = require("tweenmax");
     var ImgBoost = {
         temp: { imgli: '{{#list}}<li><div class="tb-pic tb-s50"><a href="javascript:void(0)"><img data-src="{{{url}}}" src="{{{url}}}"></a></div></li>{{/list}}' },
         Option: { set: 0, img: new Image(), imgdata: [{ url: "images/1.jpg" }, { url: "images/2.jpg" }, { url: "images/3.jpg" }, { url: "images/4.jpg" }, { url: "images/5.jpg" }] },
@@ -40,7 +41,8 @@
                     }
                     $(".spZoom").offset({ left: left, top: top });
 
-                    $("#baseImg").offset({ left: $(".divOverlay").offset().left - (left - x) * $("#baseImg").width() / xWidth, top: $(".divOverlay").offset().top - (top - y) * $("#baseImg").height() / yHegiht });
+                    //$("#baseImg").offset({ left: $(".divOverlay").offset().left - (left - x) * $("#baseImg").width() / xWidth, top: $(".divOverlay").offset().top - (top - y) * $("#baseImg").height() / yHegiht });
+                    Tweenmax.to("#baseImg", 0.5, { x: -(left - x) * $("#baseImg").width() / xWidth, y: -(top - y) * $("#baseImg").height() / yHegiht, ease: Linear.easeOut });
                 })
             }
         },
